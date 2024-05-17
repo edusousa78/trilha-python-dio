@@ -2,7 +2,7 @@ import textwrap
 from abc import ABC, abstractclassmethod, abstractproperty
 from datetime import datetime
 # Acima foram importadas as dependências necessárias
-# Aqui Ciamos a Classe Cliente
+# Classes para gerenciar clientes e suas contas
 class Cliente:
     def __init__(self, endereco):
         self.endereco = endereco
@@ -14,7 +14,7 @@ class Cliente:
     def adicionar_conta(self, conta):
         self.contas.append(conta)
 
-# Aqui Ciamos a Classe PessoaFisica filha de Cliente
+# Aqui Criamos a Classe PessoaFisica filha de Cliente
 class PessoaFisica(Cliente):
     def __init__(self, nome, data_nascimento, cpf, endereco):
         super().__init__(endereco)
@@ -22,7 +22,7 @@ class PessoaFisica(Cliente):
         self.data_nascimento = data_nascimento
         self.cpf = cpf
 
-# Aqui Ciamos a Classe Conta
+# Aqui Criamos a Classe Conta
 class Conta:
     def __init__(self, numero, cliente):
         self._saldo = 0
@@ -34,7 +34,7 @@ class Conta:
     @classmethod
     def nova_conta(cls, cliente, numero):
         return cls(numero, cliente)
-
+# Propiedades dos métodos
     @property
     def saldo(self):
         return self._saldo
@@ -82,7 +82,7 @@ class Conta:
 
         return True
 
-
+# Aqui Criamos a Classe ContaCorrente filha de Conta
 class ContaCorrente(Conta):
     def __init__(self, numero, cliente, limite=500, limite_saques=3):
         super().__init__(numero, cliente)
@@ -115,7 +115,7 @@ class ContaCorrente(Conta):
             Titular:\t{self.cliente.nome}
         """
 
-
+# Aqui Criamos a Classe Historico
 class Historico:
     def __init__(self):
         self._transacoes = []
@@ -133,7 +133,7 @@ class Historico:
             }
         )
 
-
+# Aqui Criamos a Classe Transacao
 class Transacao(ABC):
     @property
     @abstractproperty
@@ -143,8 +143,7 @@ class Transacao(ABC):
     @abstractclassmethod
     def registrar(self, conta):
         pass
-
-
+# Aqui Criamos a Classe Transacao
 class Saque(Transacao):
     def __init__(self, valor):
         self._valor = valor
@@ -173,18 +172,18 @@ class Deposito(Transacao):
 
         if sucesso_transacao:
             conta.historico.adicionar_transacao(self)
-
+# Menu de Opções a operar
 
 def menu():
     menu = """\n
     ================ MENU ================
-    [d]\tDepositar
-    [s]\tSacar
-    [e]\tExtrato
-    [nc]\tNova conta
-    [lc]\tListar contas
-    [nu]\tNovo usuário
-    [q]\tSair
+    [d]  DEPOSITAR
+    [s]  SACAR
+    [e]  EXTRATO
+    [nc] NOVA CONTA
+    [lc] LISTAR CONTAS
+    [nu] NOVO USUÁRIO
+    [q]  SAIR
     => """
     return input(textwrap.dedent(menu))
 
