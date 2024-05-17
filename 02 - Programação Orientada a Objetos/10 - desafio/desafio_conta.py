@@ -1,8 +1,8 @@
 import textwrap
 from abc import ABC, abstractclassmethod, abstractproperty
 from datetime import datetime
-
-
+# Acima foram importadas as dependências necessárias
+# Aqui Ciamos a Classe Cliente
 class Cliente:
     def __init__(self, endereco):
         self.endereco = endereco
@@ -14,7 +14,7 @@ class Cliente:
     def adicionar_conta(self, conta):
         self.contas.append(conta)
 
-
+# Aqui Ciamos a Classe PessoaFisica filha de Cliente
 class PessoaFisica(Cliente):
     def __init__(self, nome, data_nascimento, cpf, endereco):
         super().__init__(endereco)
@@ -22,7 +22,7 @@ class PessoaFisica(Cliente):
         self.data_nascimento = data_nascimento
         self.cpf = cpf
 
-
+# Aqui Ciamos a Classe Conta
 class Conta:
     def __init__(self, numero, cliente):
         self._saldo = 0
